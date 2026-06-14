@@ -1,33 +1,4 @@
-"""Generic search algorithms for the Panini logistics workshop.
-
-This module implements 6 classic AI search algorithms for pathfinding on
-a Colombian road network (41,718 nodes, 64,126 edges). Each algorithm explores
-the state space in different ways to find routes minimizing cost or steps.
-
-ALGORITHMS IMPLEMENTED:
-  1. Depth-First Search (DFS) - Explores deepest nodes first (unbounded memory use)
-  2. Breadth-First Search (BFS) - Explores shallowest nodes first (optimal for unit costs)
-  3. Uniform Cost Search (UCS) - Explores lowest-cost nodes first (optimal for weighted graphs)
-  4. A* Search - Uses f(n)=g(n)+h(n) with heuristic guidance (fastest with good heuristic)
-  5. Depth-Limited Search (DLS) - DFS with maximum depth bound (memory bounded)
-  6. Iterative Deepening Search (IDS) - Repeated DLS with increasing limits (combines DFS/BFS)
-
-COURSE CONTEXT:
-  Point 1 (20%): Implement DFS and BFS on FewestStopsDeliveryProblem
-  Point 2 (15%): Implement UCS on SingleDeliveryProblem
-  Point 3 (20%): Implement A* with heuristics on SingleDeliveryProblem
-  Point 4 (15%): Implement DLS and IDS on FewestStopsDeliveryProblem
-  Point 5 (20%): A* with multi-delivery heuristic on MultiDeliveryProblem
-
-BASELINE METRICS (Reference Implementation):
-  DFS:  5,744 steps (suboptimal), 32,511 nodes expanded, 0.83s
-  BFS:  110 steps (optimal), 22,963 nodes expanded, 0.09s
-  UCS:  405.31 km (optimal), 23,173 nodes expanded, 0.18s
-  A*:   911.37 km (optimal), 23,761 nodes expanded, 0.31s (38% fewer than UCS)
-  IDS:  3 steps (optimal), 9 nodes expanded, <0.001s
-
-See BASELINE_ANALYSIS.md for complexity proofs and performance analysis.
-"""
+"Generic search algorithms for the Panini logistics workshop."
 
 from __future__ import annotations
 
@@ -101,10 +72,6 @@ def depthFirstSearch(problem: SearchProblem) -> list[str]:
         - Memory-constrained systems (smaller frontier than BFS)
         - Problems where depth-first exploration is natural
 
-    Course Context (Point 1a):
-        Tested on FewestStopsDeliveryProblem. Baseline finds 5,744-step path
-        in 0.83s while BFS finds optimal 110-step path. 52.2x worse solution.
-
     Args:
         problem: SearchProblem defining state space, goal test, and successors
 
@@ -116,7 +83,7 @@ def depthFirstSearch(problem: SearchProblem) -> list[str]:
         >>> problem = FewestStopsDeliveryProblem(graph, 'n1037511', 'n39739')
         >>> path = depthFirstSearch(problem)  # Returns [neighbor_1, neighbor_2, ...]
 
-    ORIGINAL IMPLEMENTATION (before AI improvement):
+    IMPLEMENTACION ORIGINAL:
     ────────────────────────────────────────────────
     frontier = utils.Stack()
     start = problem.getStartState()
@@ -144,14 +111,13 @@ def depthFirstSearch(problem: SearchProblem) -> list[str]:
     Prompt 1: "Analyze search algorithms documentation & optimization"
       - Add comprehensive NumPy-style docstrings
       - Document completeness/optimality guarantees
-      - Include complexity analysis and course context
+      - Include complexity analysis
       - Explain algorithmic design choices
       - Add usage examples
 
     IMPROVEMENTS APPLIED:
     ──────────────────────
     ✓ Added comprehensive docstring with algorithm explanation
-    ✓ Added course context (Point 1a, baseline metrics)
     ✓ Documented completeness and optimality properties
     ✓ Included space/time complexity analysis
     ✓ Added explanation of why DFS is suboptimal for logistics
@@ -213,10 +179,6 @@ def breadthFirstSearch(problem: SearchProblem) -> list[str]:
         - When memory is not constrained
         - Comparing with other algorithms (optimality baseline)
 
-    Course Context (Point 1b):
-        Tested on FewestStopsDeliveryProblem. Baseline finds optimal 110-step
-        path in 0.09s. Compared vs DFS's suboptimal 5,744-step path.
-
     Args:
         problem: SearchProblem with unit-cost edges for optimality
 
@@ -228,7 +190,7 @@ def breadthFirstSearch(problem: SearchProblem) -> list[str]:
         >>> path = breadthFirstSearch(problem)  # Returns shortest path by steps
         >>> len(path)  # Number of edges in path
 
-    ORIGINAL IMPLEMENTATION (before AI improvement):
+    IMPLEMENTACION ORIGINAL:
     See depthFirstSearch for structure; BFS uses Queue instead of Stack
 
     PROMPTS USED FOR IMPROVEMENT:
@@ -238,7 +200,6 @@ def breadthFirstSearch(problem: SearchProblem) -> list[str]:
     ✓ Complete documentation with algorithm explanation
     ✓ Optimality guarantee explanation for unit-cost problems
     ✓ Space/time complexity analysis
-    ✓ Course context and baseline metrics
     """
 
     frontier = utils.Queue()
@@ -292,11 +253,6 @@ def uniformCostSearch(problem: SearchProblem) -> list[str]:
         - Baseline for comparing with A* (A* should expand fewer nodes)
         - When no good heuristic available
 
-    Course Context (Point 2):
-        Tested on SingleDeliveryProblem. Baseline finds optimal 405.31 km route
-        in 0.18s, expanding 23,173 nodes. Compare to A* which finds same cost
-        with 38.5% fewer expansions using a heuristic.
-
     Relationship to A*:
         A* = UCS + heuristic guidance
         A* expands fewer nodes than UCS if heuristic is good
@@ -316,7 +272,6 @@ def uniformCostSearch(problem: SearchProblem) -> list[str]:
     ✓ Explained how priority queue by g(n) ensures optimality
     ✓ Documented cost tracking for duplicate handling
     ✓ Relationship to A* explained
-    ✓ Course context and expected metrics
     """
 
     frontier = utils.PriorityQueue()
@@ -330,7 +285,7 @@ def uniformCostSearch(problem: SearchProblem) -> list[str]:
         _remember_frontier(problem, frontier)
 
         # Skip stale frontier entries (already found better path)
-        if cost > best_cost.get(state, float('inf')):
+        if cost > best_cost.get(state, float("inf")):
             continue
 
         if problem.isGoalState(state):
@@ -338,7 +293,7 @@ def uniformCostSearch(problem: SearchProblem) -> list[str]:
 
         for successor, action, step_cost in problem.getSuccessors(state):
             new_cost = cost + step_cost
-            if new_cost < best_cost.get(successor, float('inf')):
+            if new_cost < best_cost.get(successor, float("inf")):
                 best_cost[successor] = new_cost
                 frontier.push((successor, actions + [action], new_cost), new_cost)
                 _remember_frontier(problem, frontier)
@@ -381,12 +336,6 @@ def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic) -> list[str]:
         - Real-time pathfinding where speed matters
         - When heuristic domain knowledge available
 
-    Course Context (Point 3):
-        Tested on SingleDeliveryProblem with straightLineHeuristic (Haversine).
-        Baseline finds optimal 911.37 km path in 0.31s, expanding 23,761 nodes.
-        UCS baseline: 0.32s with 38,517 nodes (38.5% more expansions).
-        This shows heuristic effectiveness.
-
     Comparison to UCS:
         - Same optimal cost (911.37 km)
         - 38.5% fewer node expansions
@@ -410,7 +359,6 @@ def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic) -> list[str]:
     ✓ Explained f(n)=g(n)+h(n) evaluation order
     ✓ Documented heuristic admissibility requirement
     ✓ Comparison to UCS showing efficiency gains
-    ✓ Course context with empirical results
     """
 
     frontier = utils.PriorityQueue()
@@ -425,7 +373,7 @@ def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic) -> list[str]:
         _remember_frontier(problem, frontier)
 
         # Skip stale entries (found better path)
-        if g_cost > best_cost.get(state, float('inf')):
+        if g_cost > best_cost.get(state, float("inf")):
             continue
 
         if problem.isGoalState(state):
@@ -433,7 +381,7 @@ def aStarSearch(problem: SearchProblem, heuristic=nullHeuristic) -> list[str]:
 
         for successor, action, step_cost in problem.getSuccessors(state):
             new_g = g_cost + step_cost
-            if new_g < best_cost.get(successor, float('inf')):
+            if new_g < best_cost.get(successor, float("inf")):
                 best_cost[successor] = new_g
                 h_successor = heuristic(successor, problem)
                 f_value = new_g + h_successor
@@ -471,10 +419,6 @@ def depthLimitedSearch(problem: SearchProblem, limit: int) -> list[str] | None:
         - Bounded exploration in unknown-depth spaces
         - Memory-constrained systems
 
-    Course Context (Point 4):
-        DLS tests depth bounds. Baseline uses limit=6 on local problem.
-        Used by IDS, which repeatedly calls DLS with increasing limits.
-
     Important Note:
         path parameter uses set for current-branch cycle detection
         (different from global visited set in DFS/BFS). This allows
@@ -499,8 +443,9 @@ def depthLimitedSearch(problem: SearchProblem, limit: int) -> list[str] | None:
     ✓ Memory vs DFS comparison
     """
 
-    def _dls_helper(state: State, actions: list[str], path: set[State],
-                    depth_remaining: int) -> list[str] | None:
+    def _dls_helper(
+        state: State, actions: list[str], path: set[State], depth_remaining: int
+    ) -> list[str] | None:
         """Recursive depth-limited search helper.
 
         Args:
@@ -521,8 +466,9 @@ def depthLimitedSearch(problem: SearchProblem, limit: int) -> list[str] | None:
         for successor, action, _ in problem.getSuccessors(state):
             if successor not in path:
                 path.add(successor)
-                result = _dls_helper(successor, actions + [action], path,
-                                    depth_remaining - 1)
+                result = _dls_helper(
+                    successor, actions + [action], path, depth_remaining - 1
+                )
                 if result is not None:
                     return result
                 path.remove(successor)
@@ -573,11 +519,6 @@ def iterativeDeepeningSearch(
         - FewestStopsDeliveryProblem (unit costs)
         - When DFS memory efficiency AND BFS optimality both needed
 
-    Course Context (Point 4):
-        Tested on FewestStopsDeliveryProblem. Baseline finds depth-3 solution
-        in <0.001s by exploring only 9 nodes total. Much faster than BFS for
-        shallow solutions. Shows efficiency on local delivery problems.
-
     vs BFS:
         - Same optimality for unit costs
         - Much less memory (DFS-like)
@@ -604,7 +545,6 @@ def iterativeDeepeningSearch(
     IMPROVEMENTS APPLIED:
     ✓ Explained redundant work and asymptotic complexity
     ✓ Space efficiency advantage over BFS documented
-    ✓ Course context with shallow solution efficiency
     ✓ Comparison table with BFS/DFS
     """
 

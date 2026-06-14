@@ -65,7 +65,6 @@ from __future__ import annotations
 import math
 from typing import Any, Callable
 
-from algorithms import utils
 from graph.road_graph import haversine_km
 
 
@@ -126,10 +125,6 @@ def straightLineHeuristic(state: str, problem: Any) -> float:
         On 911.37 km goal: 23,761 node expansions (vs 38,517 for UCS alone)
         38.5% reduction - demonstrates heuristic guidance.
 
-    Course Context (Point 3):
-        Used in A* search for single-delivery routes. Compared directly
-        against UCS to verify optimality and measure efficiency gain.
-
     Args:
         state: Node ID (string) in the road network
         problem: SingleDeliveryProblem with .graph and .goal attributes
@@ -147,7 +142,7 @@ def straightLineHeuristic(state: str, problem: Any) -> float:
         state: str - Node ID
         problem: SearchProblem - Must have .graph.coordinates() and .goal or .cost_mode
 
-    ORIGINAL IMPLEMENTATION (before AI improvement):
+    IMPLEMENTACION ORIGINAL:
     ─────────────────────────────────────────────
     if problem.cost_mode == "stops":
         return 0.0
@@ -172,7 +167,6 @@ def straightLineHeuristic(state: str, problem: Any) -> float:
     ✓ Documented computational cost O(1)
     ✓ Explained special case for unit-cost problems
     ✓ Included empirical effectiveness (38.5% fewer expansions)
-    ✓ Added course context and usage example
     ✓ Documented type information
     """
 
@@ -221,11 +215,6 @@ def multiDeliveryHeuristic(state: tuple[str, frozenset[str]], problem: Any) -> f
         Enables solving 6-delivery TSP: 612,769 nodes in 31.7s
         Without heuristic: intractable (would expand 10M+ nodes)
 
-    Course Context (Point 5):
-        Used in A* for multi-delivery routes. Benchmark problems:
-        - 4 deliveries: 1,796.15 km, 77,134 nodes, 2.72s
-        - 6 deliveries: 2,868.96 km, 612,769 nodes, 31.7s
-
     Comparison to straightLineMultiDeliveryHeuristic:
         This version: More informed, uses road distances, slower O(n²)
         That version: Less informed, uses geodesics only, faster O(n)
@@ -251,7 +240,7 @@ def multiDeliveryHeuristic(state: tuple[str, frozenset[str]], problem: Any) -> f
         state: tuple[str, frozenset[str]]
         problem: MultiDeliveryProblem
 
-    ORIGINAL IMPLEMENTATION (before AI improvement):
+    IMPLEMENTACION ORIGINAL:
     ─────────────────────────────────────────────
     current, remaining = state
     if len(remaining) == 0:
@@ -272,7 +261,6 @@ def multiDeliveryHeuristic(state: tuple[str, frozenset[str]], problem: Any) -> f
     ✓ Explained TSP optimality reference
     ✓ Included empirical results (600k+ states in 31.7s)
     ✓ Comparison to straightLineMultiDeliveryHeuristic variant
-    ✓ Course context with benchmark metrics
     ✓ Type hints for state tuple and problem
     """
 
@@ -310,8 +298,9 @@ def multiDeliveryHeuristic(state: tuple[str, frozenset[str]], problem: Any) -> f
         return distances_cache[pair]
 
     remaining_list = list(remaining)
-    min_to_nearest = min(shortest_distance(current, delivery)
-                        for delivery in remaining_list)
+    min_to_nearest = min(
+        shortest_distance(current, delivery) for delivery in remaining_list
+    )
     mst_cost = _mst_cost(remaining_list, shortest_distance)
 
     return min_to_nearest + mst_cost
@@ -355,11 +344,6 @@ def straightLineMultiDeliveryHeuristic(
           - More node expansions but faster total time
           - Used for larger problems (5+ deliveries)
 
-    Course Context (Point 5):
-        Baseline uses straightLineMultiDeliveryHeuristic for 6-delivery case
-        because computation time matters more than informativeness.
-        Still solves in 31.7s (acceptable for reference implementation).
-
     When to Use:
         - Large number of deliveries (5+)
         - Real-time constraints (heuristic time matters)
@@ -383,7 +367,7 @@ def straightLineMultiDeliveryHeuristic(
         state: tuple[str, frozenset[str]]
         problem: MultiDeliveryProblem
 
-    ORIGINAL IMPLEMENTATION (before AI improvement):
+    IMPLEMENTACION ORIGINAL:
     ─────────────────────────────────────────────
     current, remaining = state
     if len(remaining) == 0:
@@ -412,7 +396,6 @@ def straightLineMultiDeliveryHeuristic(
     ✓ Admissibility proof (geodesic lower bound)
     ✓ Computational complexity analysis O(n)
     ✓ When to use each variant explained
-    ✓ Course context and baseline metrics
     ✓ Type hints and example
     """
 
@@ -438,8 +421,9 @@ def straightLineMultiDeliveryHeuristic(
         b_coords = problem.graph.coordinates(b)
         return haversine_km(a_coords, b_coords)
 
-    min_to_nearest = min(geodesic_distance(current, delivery)
-                        for delivery in remaining_list)
+    min_to_nearest = min(
+        geodesic_distance(current, delivery) for delivery in remaining_list
+    )
     mst_cost = _mst_cost(remaining_list, geodesic_distance)
 
     return min_to_nearest + mst_cost
