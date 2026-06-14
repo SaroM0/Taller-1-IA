@@ -106,8 +106,3 @@ El notebook `notebooks/graph_visualization.ipynb` permite explorar la red vial c
 3. **straightLineMultiDeliveryHeuristic** - Variante rápida usando solo geodésica
 
 Todas las heurísticas son **admisibles** (nunca sobrestiman el costo real) y **consistentes** (respetan la desigualdad triangular).
-
----
-
-**Última actualización**: 2026-06-14  
-**Versión**: 1.0 - Solución de Referencia
