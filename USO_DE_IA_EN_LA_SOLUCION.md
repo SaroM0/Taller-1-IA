@@ -6,16 +6,16 @@ Este documento registra cómo se utilizó asistencia de IA para mejorar la soluc
 
 > "La IA puede emplearse después para mejoras puntuales, refactorización, comentarios de calidad o apoyo en la corrección de errores, pero nunca como sustituto del esfuerzo personal ni como generador principal del código."
 
-**Versión autónoma**: ✅ Completada primero (todos los tests pasando)  
-**Mejora con IA**: ✅ Aplicada después (documentación y type hints)  
-**Prompts registrados**: ✅ Todos documentados en este archivo  
-**Versiones preservadas**: ✅ Originales en comentarios del código  
+**Versión autónoma**: [Completada] Completada primero (todos los tests pasando)  
+**Mejora con IA**: [Completada] Aplicada después (documentación y type hints)  
+**Prompts registrados**: [Completados] Todos documentados en este archivo  
+**Versiones preservadas**: [Completadas] Originales en comentarios del código  
 
 ---
 
 ## Proceso Seguido
 
-### Fase 1: Implementación Autónoma ✅
+### Fase 1: Implementación Autónoma [Completada]
 
 **Periodo**: Inicial  
 **Resultado**: 6 algoritmos + 3 heurísticas funcionando correctamente  
@@ -28,7 +28,7 @@ El código fue completamente desarrollado sin asistencia de IA:
 
 Código funcional, pruebas pasando, pero con documentación básica.
 
-### Fase 2: Mejora con Asistencia de IA ✅
+### Fase 2: Mejora con Asistencia de IA [Completada]
 
 **Periodo**: Posterior a validación  
 **Tipo**: Refactorización, documentación, type hints  
@@ -42,12 +42,12 @@ Código funcional, pruebas pasando, pero con documentación básica.
 ### 1. algorithms/search.py
 
 **Mejoras Aplicadas**:
-- ✅ 650+ líneas de docstrings añadidas
-- ✅ Type hints para 100% de funciones
-- ✅ Análisis de complejidad (tiempo, espacio)
-- ✅ Explicación de cada algoritmo
-- ✅ Ejemplos de uso
-- ✅ Versión original preservada en comentarios
+- 650+ líneas de docstrings añadidas
+- Type hints para 100% de funciones
+- Análisis de complejidad (tiempo, espacio)
+- Explicación de cada algoritmo
+- Ejemplos de uso
+- Versión original preservada en comentarios
 
 **Líneas de código antes**: 223  
 **Líneas de código después**: 223 (MISMO)  
@@ -124,8 +124,8 @@ def depthFirstSearch(problem: SearchProblem) -> list[str]:
         DFS usa una pila LIFO (Last-In-First-Out)...
     
     Completitud y Optimalidad:
-        ✓ Completo: Siempre encuentra solución si existe
-        ✗ Óptimo: NO garantiza camino mínimo
+        [Si] Completo: Siempre encuentra solución si existe
+        [No] Óptimo: NO garantiza camino mínimo
     
     Complejidad en Espacio: O(b·d) ...
     Complejidad en Tiempo: O(b^d) ...
@@ -153,11 +153,10 @@ def depthFirstSearch(problem: SearchProblem) -> list[str]:
     [Ver Prompt 1 arriba]
     
     MEJORAS APLICADAS:
-    ──────────────────
-    ✓ Docstring detallado con algoritmo explicado
-    ✓ Type hints añadidos
-    ✓ Análisis de complejidad
-    ✓ Contexto del curso
+    - Docstring detallado con algoritmo explicado
+    - Type hints añadidos
+    - Análisis de complejidad
+    - Contexto del curso
     
     [VERSIÓN FINAL - CÓDIGO MEJORADO AQUÍ]
     """
@@ -170,12 +169,12 @@ def depthFirstSearch(problem: SearchProblem) -> list[str]:
 ### 2. algorithms/heuristics.py
 
 **Mejoras Aplicadas**:
-- ✅ 700+ líneas de docstrings añadidas
-- ✅ Pruebas matemáticas de admisibilidad
-- ✅ Documentación de consistencia
-- ✅ Type hints 100%
-- ✅ Comparación de variantes
-- ✅ Versión original preservada
+- 700+ líneas de docstrings añadidas
+- Pruebas matemáticas de admisibilidad
+- Documentación de consistencia
+- Type hints 100%
+- Comparación de variantes
+- Versión original preservada
 
 **Líneas de código antes**: 127  
 **Líneas de código después**: 127 (MISMO)  
@@ -192,7 +191,7 @@ def straightLineHeuristic(state: str, problem: Any) -> float:
         La ruta más corta en una esfera (círculo máximo) es un límite 
         inferior en cualquier ruta en la red vial (trayecto curvo).
         Por lo tanto: h(n) ≤ true_distance(n, goal)
-        ∴ Admisible ✓
+        [Demostración] Admisible
     
     Prueba de Consistencia:
         Para cualquier sucesor n' con costo de arista c(n, n'):
@@ -201,7 +200,7 @@ def straightLineHeuristic(state: str, problem: Any) -> float:
         Por desigualdad triangular: geodesic(n, goal) ≤ geodesic(n, n') + geodesic(n', goal)
         Pero cost(n, n') ≥ geodesic(n, n')
         Por lo tanto: h(n) ≤ c(n, n') + h(n')
-        ∴ Consistente ✓
+        [Demostración] Consistente
     
     ORIGINAL IMPLEMENTATION (antes de mejora con IA):
     ────────────────────────────────────────────────
@@ -216,11 +215,10 @@ def straightLineHeuristic(state: str, problem: Any) -> float:
     Prompt 2: "Implementé 3 funciones heurísticas..."
     
     MEJORAS APLICADAS:
-    ──────────────────
-    ✓ Prueba matemática de admisibilidad
-    ✓ Prueba de consistencia
-    ✓ Type hints
-    ✓ Ejemplos de uso
+    - Prueba matemática de admisibilidad
+    - Prueba de consistencia
+    - Type hints
+    - Ejemplos de uso
     
     [VERSIÓN FINAL IGUAL AL ORIGINAL]
     """
@@ -236,11 +234,11 @@ def straightLineHeuristic(state: str, problem: Any) -> float:
 ## README.md - Mejora con IA
 
 **Cambios Realizados**:
-- ✅ Traducción completa al español
-- ✅ Nota explícita sobre mejora con IA
-- ✅ Estructura mejorada
-- ✅ Tabla de emparejamientos algoritmo-problema
-- ✅ Documentación clara
+- Traducción completa al español
+- Nota explícita sobre mejora con IA
+- Estructura mejorada
+- Tabla de emparejamientos algoritmo-problema
+- Documentación clara
 
 **Nota Agregada**:
 ```markdown
@@ -313,9 +311,9 @@ def algoritmo_o_funcion(parámetros) -> tipo:
     
     MEJORAS APLICADAS:
     ──────────────────
-    ✓ [Mejora 1]
-    ✓ [Mejora 2]
-    ✓ [Mejora 3]
+    - [Mejora 1]
+    - [Mejora 2]
+    - [Mejora 3]
     """
     
     # [VERSIÓN FINAL - CÓDIGO IGUAL AL ORIGINAL]
@@ -325,21 +323,21 @@ def algoritmo_o_funcion(parámetros) -> tipo:
 
 ## Validación y Verificación
 
-### ✅ Código Funcional
+### Código Funcional [Validado]
 - Todos los tests aún pasan (11/11)
 - Métricas baseline idénticas
 - Algoritmos producen los mismos resultados
 
-### ✅ Integridad del Proceso
+### Integridad del Proceso [Validada]
 - Versión original preservada en comentarios
 - Todos los prompts documentados
 - Versión final claramente marcada
 
-### ✅ Adherencia a Política
-- Primera versión completamente autónoma ✓
-- IA solo para mejora, no generación ✓
-- TODO documentado en los archivos ✓
-- Versión inicial y prompts en comentarios ✓
+### Adherencia a Política [Verificada]
+- Primera versión completamente autónoma
+- IA solo para mejora, no generación
+- TODO documentado en los archivos
+- Versión inicial y prompts en comentarios
 
 ---
 
@@ -368,14 +366,14 @@ def algoritmo_o_funcion(parámetros) -> tipo:
 
 ### Prompts Efectivos (Basados en esta Experiencia)
 
-✅ **FUNCIONA**: "Agrega docstrings detallados que expliquen..."  
-✅ **FUNCIONA**: "Documenta la complejidad en tiempo y espacio de..."  
-✅ **FUNCIONA**: "Prueba matemáticamente que esta heurística es admisible"  
-✅ **FUNCIONA**: "Traduce este documento al español y mejora la estructura"  
+[RECOMENDADO] **FUNCIONA**: "Agrega docstrings detallados que expliquen..."  
+[RECOMENDADO] **FUNCIONA**: "Documenta la complejidad en tiempo y espacio de..."  
+[RECOMENDADO] **FUNCIONA**: "Prueba matemáticamente que esta heurística es admisible"  
+[RECOMENDADO] **FUNCIONA**: "Traduce este documento al español y mejora la estructura"  
 
-❌ **NO USAR**: "Implementa la función X que haga Y"  
-❌ **NO USAR**: "Refactoriza este código para que sea más eficiente"  
-❌ **NO USAR**: "Reescribe este archivo de forma diferente"  
+[NO RECOMENDADO] **NO USAR**: "Implementa la función X que haga Y"  
+[NO RECOMENDADO] **NO USAR**: "Refactoriza este código para que sea más eficiente"  
+[NO RECOMENDADO] **NO USAR**: "Reescribe este archivo de forma diferente"  
 
 ---
 
@@ -383,11 +381,11 @@ def algoritmo_o_funcion(parámetros) -> tipo:
 
 Esta solución de referencia demuestra cómo usar IA responsablemente en un proyecto académico:
 
-- ✅ Trabajo autónomo como base (todo funciona primero)
-- ✅ IA para mejorar, no reemplazar
-- ✅ Documentación completa del proceso
-- ✅ Transparencia total sobre qué cambió y por qué
-- ✅ Preservación de la versión original
+- Trabajo autónomo como base (todo funciona primero)
+- IA para mejorar, no reemplazar
+- Documentación completa del proceso
+- Transparencia total sobre qué cambió y por qué
+- Preservación de la versión original
 
 Estudiantes pueden usar este archivo como modelo para documentar su propio uso de IA en la solución.
 
