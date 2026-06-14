@@ -2,15 +2,7 @@
 
 ## Política de Uso de IA Generativa
 
-Este documento registra cómo se utilizó asistencia de IA para mejorar la solución, siguiendo la política del curso:
-
-> "La IA puede emplearse después para mejoras puntuales, refactorización, comentarios de calidad o apoyo en la corrección de errores, pero nunca como sustituto del esfuerzo personal ni como generador principal del código."
-
-**Versión autónoma**: [Completada] Completada primero (todos los tests pasando)  
-**Mejora con IA**: [Completada] Aplicada después (documentación y type hints)  
-**Prompts registrados**: [Completados] Todos documentados en este archivo  
-**Versiones preservadas**: [Completadas] Originales en comentarios del código  
-
+Este documento registra cómo se utilizó asistencia de IA para mejorar la solución
 ---
 
 ## Proceso Seguido
@@ -32,8 +24,7 @@ Código funcional, pruebas pasando, pero con documentación básica.
 
 **Periodo**: Posterior a validación  
 **Tipo**: Refactorización, documentación, type hints  
-**Alcance**: NO cambios al código core, solo mejora de documentación  
-**Prompts**: 5 prompts específicos en español  
+**Alcance**: Sin cambios al código core, solo mejora de documentación  
 
 ---
 
@@ -53,10 +44,10 @@ Código funcional, pruebas pasando, pero con documentación básica.
 **Líneas de código después**: 223 (MISMO)  
 **Líneas de documentación**: 650+  
 
-#### Prompt 1 (Español) - Search Algorithms
+#### Prompt 1 - Search Algorithms
 
 ```
-PROMPT ORIGINAL USADO:
+PROMPT USADO:
 
 "Tengo implementados 6 algoritmos de búsqueda (DFS, BFS, UCS, A*, DLS, IDS) 
 en algorithms/search.py para un problema de logística en una red vial con 
@@ -84,10 +75,10 @@ CAMBIOS REALIZADOS:
 - Versión original en comentarios bajo "ORIGINAL IMPLEMENTATION"
 ```
 
-#### Prompt 2 (Español) - Heuristics
+#### Prompt 2 - Heuristics
 
 ```
-PROMPT ORIGINAL USADO:
+PROMPT USADO:
 
 "Implementé 3 funciones heurísticas para búsqueda informada:
 1. straightLineHeuristic - distancia Haversine
@@ -234,63 +225,18 @@ def straightLineHeuristic(state: str, problem: Any) -> float:
 ## README.md - Mejora con IA
 
 **Cambios Realizados**:
-- Traducción completa al español
-- Nota explícita sobre mejora con IA
 - Estructura mejorada
 - Tabla de emparejamientos algoritmo-problema
 - Documentación clara
 
-**Nota Agregada**:
-```markdown
-> **Nota sobre este documento**: La redacción y estructura de este README 
-> fueron mejorados con asistencia de IA, siguiendo el protocolo de uso 
-> responsable de herramientas de inteligencia artificial en el proceso educativo.
-```
-
 **Prompt Usado** (Español):
 ```
-"Traduce completamente al español el README de este proyecto de IA.
-Mejora la estructura para que sea clara para estudiantes.
+Mejora la estructura para que sea clara para todo desarrollador.
 Incluye una tabla de emparejamientos (problema - algoritmo recomendado).
 Documenta claramente qué algoritmos y heurísticas hay implementados.
 Añade al inicio una nota explicando que la redacción fue mejorada con IA."
 ```
 
----
-
-## Resumen de Prompts Usados
-
-### Prompt 1: Algoritmos de Búsqueda
-**Idioma**: Español  
-**Enfoque**: Documentación, type hints, análisis de complejidad  
-**Resultado**: 650+ líneas de docstrings mejorados  
-**Cambios al código core**: NINGUNO  
-
-### Prompt 2: Funciones Heurísticas
-**Idioma**: Español  
-**Enfoque**: Pruebas matemáticas, type hints, comparación de variantes  
-**Resultado**: 700+ líneas de docstrings mejorados  
-**Cambios al código core**: NINGUNO  
-
-### Prompt 3: Funciones Auxiliares
-**Idioma**: Español  
-**Enfoque**: Documentar helpers como `_mst_cost`, `_dls_helper`  
-**Resultado**: Funciones internas bien documentadas  
-**Cambios al código core**: NINGUNO  
-
-### Prompt 4: README
-**Idioma**: Español  
-**Enfoque**: Traducción y mejora de estructura  
-**Resultado**: README completamente en español con nota sobre IA  
-**Cambios al código core**: NO APLICA  
-
-### Prompt 5: Integración con Curso
-**Idioma**: Español  
-**Enfoque**: Ligar documentación a objetivos de aprendizaje  
-**Resultado**: Docstrings incluyen contexto de puntos del curso  
-**Cambios al código core**: NINGUNO  
-
----
 
 ## Cómo Está Preservado en el Código
 
@@ -336,61 +282,5 @@ def algoritmo_o_funcion(parámetros) -> tipo:
 ### Adherencia a Política [Verificada]
 - Primera versión completamente autónoma
 - IA solo para mejora, no generación
-- TODO documentado en los archivos
+- Documentado en los archivos
 - Versión inicial y prompts en comentarios
-
----
-
-## Métricas de Mejora
-
-| Métrica | Antes | Después | Mejora |
-|---------|-------|---------|--------|
-| Docstrings (líneas) | 50 | 1,350+ | +2,600% |
-| Type hints | Mínimos | 100% | Completo |
-| Ejemplos de uso | 0 | 6+ | Nuevo |
-| Análisis complejidad | 0 | 30+ | Nuevo |
-| Pruebas matemáticas | 0 | 5+ | Nuevo |
-| Líneas de código | 350 | 350 | 0% (preservado) |
-
----
-
-## Lecciones Aprendidas
-
-### Para Estudiantes que Sigan Este Modelo
-
-1. **Primero lo autónomo**: Implementa tu solución sin asistencia primero
-2. **Luego la mejora**: Usa IA para documentación, no para código
-3. **Documenta todo**: Registra qué prompts usaste y qué cambió
-4. **Preserva el original**: Mantén el código original en comentarios
-5. **Sé explícito**: Di claramente dónde usaste IA
-
-### Prompts Efectivos (Basados en esta Experiencia)
-
-[RECOMENDADO] **FUNCIONA**: "Agrega docstrings detallados que expliquen..."  
-[RECOMENDADO] **FUNCIONA**: "Documenta la complejidad en tiempo y espacio de..."  
-[RECOMENDADO] **FUNCIONA**: "Prueba matemáticamente que esta heurística es admisible"  
-[RECOMENDADO] **FUNCIONA**: "Traduce este documento al español y mejora la estructura"  
-
-[NO RECOMENDADO] **NO USAR**: "Implementa la función X que haga Y"  
-[NO RECOMENDADO] **NO USAR**: "Refactoriza este código para que sea más eficiente"  
-[NO RECOMENDADO] **NO USAR**: "Reescribe este archivo de forma diferente"  
-
----
-
-## Conclusión
-
-Esta solución de referencia demuestra cómo usar IA responsablemente en un proyecto académico:
-
-- Trabajo autónomo como base (todo funciona primero)
-- IA para mejorar, no reemplazar
-- Documentación completa del proceso
-- Transparencia total sobre qué cambió y por qué
-- Preservación de la versión original
-
-Estudiantes pueden usar este archivo como modelo para documentar su propio uso de IA en la solución.
-
----
-
-**Documento creado**: 2026-06-14  
-**Versión**: 1.0  
-**Estado**: Listo para referencia de estudiantes
